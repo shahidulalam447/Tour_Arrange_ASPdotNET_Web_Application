@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Tour_Arrange.Models.Client>
+@{
+    ViewBag.Title = "Index";
+}
+<h4 class="mb-lg-4 text-center text-primary">Client List</h4>
+<div class="d-flex justify-content-end mb-2">
+    <a href="@Url.Action("Create","Clients")" id="btnCreate" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus pr-2"></i> Add New</a>
+</div>
+<div>
+    @foreach (var cl in Model)
+    {
+        <div class="card mb-2">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <img src="@cl.Picture" width="32" height="32" class="rounded" />
+                    <label class="mr-2"><b>Client: </b>@Html.DisplayFor(x => cl.ClientName)</label>
+                    <label class="mr-2"><b>Age: </b>@Html.DisplayFor(x => cl.Age)</label>
+                    <label class="mr-2"><b>Date of birth: </b>@Html.DisplayFor(x => cl.BirthDate)</label>
+                    <label class="mr-2">
+                        <b>Marital Status: </b>@if (cl.MaritalStatus)
+                        {
+                            <span>Married</span>
+                        }
+                        else
+                        {
+                            <span>Unmarried</span>
+                        }
+                    </label>
+                </div>
+                <div>
+                    <a href="@Url.Action("Edit", "Clients", new { id=cl.ClientId})" id="btnEntryEdit" class="btn btn-outline-success"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("Delete", "Clients", new { id=cl.ClientId})" id="btnEntryDelete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-sm" id="myTable">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Spot Id</th>
+                            <th>Spot Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in cl.BookingEntries)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(x => item.Spot.SpotId)</td>
+                                <td>@Html.DisplayFor(x => item.Spot.SpotName)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

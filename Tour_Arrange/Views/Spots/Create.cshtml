@@ -1,0 +1,37 @@
+﻿@model Tour_Arrange.Models.ViewModels.SpotVM
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "Spots", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <h2 class="mb-lg-4 text-center text-primary"> New Spot Add</h2>
+        <div class="col-8">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(x => x.SpotName, htmlAttributes: new { @class = "control-label col-3" })
+                <div class="col-9">
+                    @Html.EditorFor(x => x.SpotName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.SpotName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(x => x.PicturePath, htmlAttributes: new { @class = "control-label col-3" })
+                <div class="col-9">
+                    @Html.TextBoxFor(x => x.PicturePath, new { @class = "form-control", Type = "file" })
+                    @Html.ValidationMessageFor(x => x.PicturePath, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-start offset-2">
+            <input type="submit" value="Create" class="btn btn-primary btn-sm mt-3" />
+        </div>
+    </div>
+    <div>
+        <a href="@Url.Action("Index","Spots")" class="btn btn-link"><i class="fa fa-arrow-left"></i> Back to list</a>
+    </div>
+}
+
+

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Tour_Arrange.Models.Department>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4 class="mb-lg-4 text-center text-primary">Department List</h4>
+
+<p class="d-flex justify-content-end">
+    <a href="@Url.Action("Create","Departments")" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>
+</p>
+
+<div class="card-body">
+    <table class="table table-bordered table-striped table-sm" id="myTable">
+        <thead class="table-primary">
+            <tr>
+                <th>Department Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => item.DepartmentName)</td>
+                    <td>
+                        <div>
+                            <a href="@Url.Action("Edit", "Departments", new { id= item.DepartmentId})" id="btnEntryEdit" class="btn btn-outline-success"><i class="fa fa-edit"></i></a>
+                            <a href="@Url.Action("Delete", "Departments", new { id=item.DepartmentId})" id="btnEntryDelete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

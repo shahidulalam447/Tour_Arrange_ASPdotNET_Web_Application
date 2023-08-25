@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Tour_Arrange.Models.Spot>
+@{
+    ViewBag.Title = "Index";
+}
+<h4 class="mb-lg-4 text-center text-primary">Spot</h4>
+
+<div class="d-flex justify-content-end mb-2">
+    <a href="@Url.Action("Create","Spots")" id="btnCreate" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus pr-2"></i> Add New</a>
+</div>
+<div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm" id="myTable">
+            <thead class="table-primary">
+                <tr>
+                    <th>Spot Name</th>
+                    <th>Spot Picture</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(x => item.SpotName)</td>
+                        <td> <img src="@item.SpotPicture" width="100" class="rounded" /></td>
+                        <td>
+                            <div>
+                                <a href="@Url.Action("Edit", "Spots", new { id= item.SpotId})" id="btnEntryEdit" class="btn btn-outline-success"><i class="fa fa-edit"></i></a>
+                                <a href="@Url.Action("Delete", "Spots", new { id=item.SpotId})" id="btnEntryDelete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MasterDetails</title>
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            font-family: 'Century Gothic';
+        }
+        #logo{
+            width:100px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm sticky-top navbar-toggleable-sm navbar-dark bg-primary">
+        <div class="container">
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                <img src="~/Logo/Tour Arrange.png" alt="Logo" id="logo" />
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-2">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link " })</li>
+                    <li>@Html.ActionLink("Spots", "Index", "Spots", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Client", "Index", "Clients", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Employees", "Index", "Employees", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Departments", "Index", "Departments", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+    <footer>
+        @*<p class="text-center sticky-bottom">&copy; @DateTime.Now.Year - MD SHAHIDUL ALAM <br /> shahidulalam447@gmail.com</p>*@
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script>
+        //Spot
+        $('#btnPlus').click(function (e) {
+            e.preventDefault();
+            var spotContainer = $("#SpotContainer");
+            $.ajax({
+                url: "/Clients/AddNewSpot",
+                type: "GET",
+                success: function (data) {
+                    spotContainer.append(data);
+                }
+            })
+        })
+        //
+        $(document).on("click", "#btnDeleteSpot", function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        });
+
+        //Department
+        $('#btnP').click(function (e) {
+            e.preventDefault();
+            var spotContainer = $("#DepartmentContainer");
+            $.ajax({
+                url: "/Employees/AddNewDepartment",
+                type: "GET",
+                success: function (data) {
+                    spotContainer.append(data);
+                }
+            })
+        })
+        //
+        $(document).on("click", "#btnDeleteDepartment", function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        });
+
+    </script>
+</body>
+</html>
